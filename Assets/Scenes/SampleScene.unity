@@ -212,40 +212,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &432352520 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6942704783235905631, guid: 0996c80540c07304a85cad1a28fd5c61,
-    type: 3}
-  m_PrefabInstance: {fileID: 5308212670889796127}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &432352521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 432352520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189a9d9904a778b4a8ad1f0819640219, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  motor: {fileID: 0}
-  data: {fileID: 0}
---- !u!114 &432352522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 432352520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03a8385db4ca4bb4ebabde9a31186401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 0
-  rotateSpeed: 720
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,11 +495,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6544529942652616446, guid: 0996c80540c07304a85cad1a28fd5c61,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0996c80540c07304a85cad1a28fd5c61, type: 3}
