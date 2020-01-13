@@ -17,8 +17,7 @@ public class TankMotor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move(3);
-        Rotate(180);
+
     }
 
     public void Move(float speed)
