@@ -31,47 +31,52 @@ public class InputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        switch (input)
+        if (this.gameObject.tag == "Player")
         {
-            case InputScheme.arrowKeys:
-                if (Input.GetKey(KeyCode.UpArrow))
-                {
-                    motor.Move(data.moveSpeed);
-                }
-                if (Input.GetKey(KeyCode.DownArrow))
-                {
-                    motor.Move(-data.moveSpeed);
-                }
-                if (Input.GetKey(KeyCode.RightArrow))
-                {
-                    motor.Rotate(data.rotateSpeed);
-                }
-                if (Input.GetKey(KeyCode.LeftArrow))
-                {
-                    motor.Rotate(-data.rotateSpeed);
-                }
-                break;
+            switch (input)
+            {
+                case InputScheme.arrowKeys:
+                    if (Input.GetKey(KeyCode.UpArrow))
+                    {
+                        motor.Move(data.moveSpeed);
+                    }
+                    if (Input.GetKey(KeyCode.DownArrow))
+                    {
+                        motor.Move(-data.moveSpeed);
+                    }
+                    if (Input.GetKey(KeyCode.RightArrow))
+                    {
+                        motor.Rotate(data.rotateSpeed);
+                    }
+                    if (Input.GetKey(KeyCode.LeftArrow))
+                    {
+                        motor.Rotate(-data.rotateSpeed);
+                    }
+                    break;
 
-            case InputScheme.WASD:
-                if (Input.GetKey(KeyCode.W))
-                {
-                    motor.Move(data.moveSpeed);
-                }
-                if (Input.GetKey(KeyCode.S))
-                {
-                    motor.Move(-data.moveSpeed);
-                }
-                if (Input.GetKey(KeyCode.D))
-                {
-                    motor.Rotate(data.rotateSpeed);
-                }
-                if (Input.GetKey(KeyCode.A))
-                {
-                    motor.Rotate(-data.rotateSpeed);
-                }
-                break;
+                case InputScheme.WASD:
+                    if (Input.GetKey(KeyCode.W))
+                    {
+                        motor.Move(data.moveSpeed);
+                    }
+                    if (Input.GetKey(KeyCode.S))
+                    {
+                        motor.Move(-data.moveSpeed);
+                    }
+                    if (Input.GetKey(KeyCode.D))
+                    {
+                        motor.Rotate(data.rotateSpeed);
+                    }
+                    if (Input.GetKey(KeyCode.A))
+                    {
+                        motor.Rotate(-data.rotateSpeed);
+                    }
+                    break;
+            }
         }
+        
+    
+        
         if (canShoot)
         {
             if (Input.GetKeyDown(KeyCode.Space))
