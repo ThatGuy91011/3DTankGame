@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TankData : MonoBehaviour
 {
+    //Variable to hold attributes of each tank
     public float moveSpeed;
 
     public float rotateSpeed;
@@ -19,26 +20,38 @@ public class TankData : MonoBehaviour
     public float maxHealth = 10.0f;
 
     public int score = 0;
-    public int pointValue = 10;
+
 
     void Start()
     {
+        //Each tank's health starts out at the maximum
         health = maxHealth;
     }
 
+    //If a tank takes damage...
     public void TakeDamage(float damage)
     {
+        //Reduce health by how much damage is done
         health -= damage;
+        //If health lowers below 0...
         if (health <= 0)
         {
+            //The tank dies
             Die();
         }
     }
 
+    //Function for tank death
     public void Die()
-    {
-        //Function for tank death
+    { 
+       
+        Destroy(this.gameObject);
     }
 
+    //Function for tank score
+    public void Score(int points)
+    {
+        score += points;
+    }
 
 }

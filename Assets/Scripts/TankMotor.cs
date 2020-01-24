@@ -14,12 +14,6 @@ public class TankMotor : MonoBehaviour
         tf = GetComponent<Transform>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void Move(float speed)
     {
         // Create a vector to hold our speed data

@@ -7,8 +7,10 @@ using UnityEngine;
 [RequireComponent(typeof(TankShooter))]
 public class InputController : MonoBehaviour
 {
+    //Allows the inspector to change the control scheme of the game
     public enum InputScheme { WASD, arrowKeys };
     public InputScheme input = InputScheme.WASD;
+
 
     private TankData data;
 
@@ -31,10 +33,11 @@ public class InputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.gameObject.tag == "Player")
-        {
+
+            //Switches from arrow keys or WASD depending on the inspector's choice
             switch (input)
             {
+                //Control scheme for the arrow keys
                 case InputScheme.arrowKeys:
                     if (Input.GetKey(KeyCode.UpArrow))
                     {
@@ -54,6 +57,7 @@ public class InputController : MonoBehaviour
                     }
                     break;
 
+                //Control scheme for WASD
                 case InputScheme.WASD:
                     if (Input.GetKey(KeyCode.W))
                     {
@@ -73,21 +77,24 @@ public class InputController : MonoBehaviour
                     }
                     break;
             }
-        }
+        
         
     
-        
+        //If the tank is able to shoot...
         if (canShoot)
         {
+            //If the player presses space...
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 //Shooting
                 shooter.Shoot();
+                //Cooldown time
                 canShoot = false;
                 timeUntilCanShoot = data.fireRate;
             }
         }
 
+        //Cooldown
         if (timeUntilCanShoot > 0)
         {
             timeUntilCanShoot -= Time.deltaTime;

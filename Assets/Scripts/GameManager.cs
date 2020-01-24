@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     // Runs before any Start() functions run
     void Awake()
     {
+        //Makes sure there is only one GameManager
         if (instance == null)
         {
             instance = this;
