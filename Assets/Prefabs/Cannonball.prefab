@@ -124,3 +124,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   force: 0
+  pointValue: 10
