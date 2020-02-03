@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
     <Compile Include="Assets\Scripts\SimpleAIController.cs" />
+    <Compile Include="Assets\Scripts\SimpleAIController2.cs" />
     <Compile Include="Assets\Scripts\TankData.cs" />
     <Compile Include="Assets\Scripts\TankMotor.cs" />
     <Compile Include="Assets\Scripts\TankShooter.cs" />
