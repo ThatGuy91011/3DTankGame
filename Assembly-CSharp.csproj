@@ -69,10 +69,10 @@
     <Compile Include="Assets\Scripts\SimpleAIController.cs" />
     <Compile Include="Assets\Scripts\SimpleAIController2.cs" />
     <Compile Include="Assets\Scripts\SimpleAIController3.cs" />
+    <Compile Include="Assets\Scripts\SimpleAIController4.cs" />
     <Compile Include="Assets\Scripts\TankData.cs" />
     <Compile Include="Assets\Scripts\TankMotor.cs" />
     <Compile Include="Assets\Scripts\TankShooter.cs" />
-    <Compile Include="Assets\Scripts\TextDestroy.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/KIRWALLS/Desktop/3DTankGame/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
