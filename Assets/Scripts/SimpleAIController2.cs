@@ -10,13 +10,15 @@ public class SimpleAIController2 : MonoBehaviour
     public AttackMode attackMode;
     public Transform target;
 
-    private TankData data;
 
-    private TankMotor motor;
 
     public float fleeDistance = 1.0f;
 
     private Transform tf;
+
+    private TankData data;
+
+    private TankMotor motor;
     // Start is called before the first frame update
     void Start()
     {

@@ -453,6 +453,7 @@ GameObject:
   - component: {fileID: 432352522}
   - component: {fileID: 1542030383725881347}
   - component: {fileID: 1254955445567254605}
+  - component: {fileID: 5605850799479026101}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -554,3 +555,24 @@ MonoBehaviour:
   cannonball: {fileID: 1322587861166017805, guid: dcd20b49125926348806addbd2891d9b,
     type: 3}
   firePoint: {fileID: 540994813855432096}
+  canShoot: 1
+  despawnTime: 0
+--- !u!114 &5605850799479026101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6942704783235905631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03eb5898a3103e646a3bf66e1fb5b941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiState: 0
+  personality: 0
+  stateEnterTime: 0
+  aiSenseRadius: 0
+  restingHealRate: 25
+  player: {fileID: 0}
+  data: {fileID: 0}
