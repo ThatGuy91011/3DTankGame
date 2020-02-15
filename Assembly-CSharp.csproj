@@ -63,7 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Cannonball.cs" />
-    <Compile Include="Assets\Scripts\EnemyMove.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
     <Compile Include="Assets\Scripts\SimpleAIController.cs" />
@@ -73,6 +72,7 @@
     <Compile Include="Assets\Scripts\TankData.cs" />
     <Compile Include="Assets\Scripts\TankMotor.cs" />
     <Compile Include="Assets\Scripts\TankShooter.cs" />
+    <None Include="Assets\AI Personalities.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/KIRWALLS/Desktop/3DTankGame/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

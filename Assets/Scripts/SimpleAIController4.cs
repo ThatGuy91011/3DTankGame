@@ -8,8 +8,8 @@ using UnityEngine;
 public class SimpleAIController4 : MonoBehaviour
 {
     private Transform tf;
-    public enum AIState { Chase, ChaseAndFire, CheckForFlee, Flee, Rest };
-    public AIState aiState = AIState.Chase;
+    public enum AIState { Chase, Patrol, Hear };
+    public AIState aiState = AIState.Patrol;
     public enum Personalities { Inky, Pinky, Blinky, Clyde };
 
     public Personalities personality = Personalities.Inky;
@@ -20,9 +20,7 @@ public class SimpleAIController4 : MonoBehaviour
     public TankData data;
     public TankMotor motor;
 
-    public float hearingDistance = 25f;
-
-    public float FOV = 45f;
+    public float hearingDistance = 10f;
 
     public float inSight = 10f;
     public float distance;
@@ -60,9 +58,11 @@ public class SimpleAIController4 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Always finds the distance between the player and the enemy
         distance = Vector3.Distance(player.GetComponent<Transform>().position, tf.position);
         switch (personality)
         {
+            //Different personalities
             case Personalities.Inky:
                 Inky();
                 break;
@@ -77,104 +77,58 @@ public class SimpleAIController4 : MonoBehaviour
                 break;
         }
     }
-
-   
-
-    private void Flee(GameObject target)
-    {
-        // The vector from ai to target is target position minus our position.
-        Vector3 vectorToTarget = target.GetComponent<Transform>().position - tf.position;
-        // We can flip this vector by -1 to get a vector AWAY from our target
-        Vector3 vectorAway = vectorToTarget * -1;
-        // Now, we can normalize that vector to give it a magnitude of 1
-        vectorAway.Normalize();
-        // A normalized vector can be multiplied by a length to make a vector of that length.
-        vectorAway *= fleeDistance;
-        // We can find the position in space we want to move to by adding our vector away from our AI to our AI's position.
-        //This gives us a point that is "that vector away" from our current position.
-        Vector3 fleePosition = vectorAway + tf.position;
-        motor.RotateTowards(fleePosition, data.rotateSpeed);
-        motor.Move(data.moveSpeed);
-    }
-
-    private bool playerIsInRange()
-    {
-        if (distance < 5f)
-        {
-            return true;
-        }
-        else
-        {
-            Rest();
-            return false;
-        }
-            
-
-    }
+    //Hearing/Seeing
     private void Inky()
     {
         switch (aiState)
         {
-            case AIState.Chase:
-                //State behaviors
-                Chase(player);
-                //Check for transitions in order of priority
-                if (data.health < (data.maxHealth * .5))
+            case AIState.Patrol:
+                //Always move in a circle in patrol mode
+                motor.Move(data.moveSpeed);
+                motor.Rotate(data.rotateSpeed);
+                //If the player is able to be heard...
+                if (distance <= hearingDistance)
                 {
-                    ChangeState(AIState.CheckForFlee);
-                }
-                else if (playerIsInRange())
-                {
-                    ChangeState(AIState.ChaseAndFire);
+                    //Change to hear
+                    ChangeState(AIState.Hear);
                 }
                 break;
-            case AIState.ChaseAndFire:
-                Chase(player);
-                if (data.health < (data.maxHealth * .5))
+            case AIState.Hear:
+                //Look at the player
+                motor.RotateTowards(player.GetComponent<Transform>().position, data.moveSpeed);
+                //If the AI sees the player...
+                if (CanMove(data.moveSpeed))
                 {
-                    ChangeState(AIState.CheckForFlee);
-                }
-                else if (!playerIsInRange())
-                {
+                    //Chase the player
                     ChangeState(AIState.Chase);
                 }
-                break;
-            case AIState.CheckForFlee:
-                if (!playerIsInRange())
-                {
-                    ChangeState(AIState.Rest);
-                }
+                //Otherwise...
                 else
                 {
-                    ChangeState(AIState.Flee);
+                    //Go back to patrol
+                    ChangeState(AIState.Patrol);
                 }
                 break;
-            case AIState.Flee:
-                Flee(player);
-                //Wait 30 seconds for flee
-                if (Time.time >= (stateEnterTime * 3f))
+            case AIState.Chase:
+                //Chase the player
+                Chase(player);
+                //If the AI no longer sees the player
+                if (!CanMove(data.moveSpeed))
                 {
-                    ChangeState(AIState.CheckForFlee);
+                    //If the player is still alive
+                    if (player.GetComponent<TankData>().health > 0)
+                    {
+                        //Go back to patrol
+                        ChangeState(AIState.Patrol);
+                    }
                 }
-                break;
-            case AIState.Rest:
-                Rest();
-                if (playerIsInRange())
-                {
-                    ChangeState(AIState.Flee);
-                }
-
-                else if (Mathf.Approximately(data.health, data.maxHealth))
-                {
-                    ChangeState(AIState.Chase);
-                }
-                break;
-            default:
                 break;
         }
     }
+    //Waypoints
     private void Pinky()
     {
+        //If the AI is already rotated towards the next waypoint...
         if (motor.RotateTowards(waypoints[currentWaypoint].position, data.rotateSpeed))
         {
             // Do nothing!
@@ -182,13 +136,17 @@ public class SimpleAIController4 : MonoBehaviour
         else
         {
             // Move forward
-            motor.Move(data.moveSpeed);
+            if (CanMove(data.moveSpeed))
+            {
+                motor.Move(data.moveSpeed);
+            }
         }
-        // If we are close to the waypoint,
+        // If we are close to the waypoint...
         if (Vector3.SqrMagnitude(waypoints[currentWaypoint].position - tf.position) < (closeEnough * closeEnough))
         {
             switch (loopType)
             {
+                //If the loop type is "stop"...
                 case LoopType.Stop:
 
                     // Advance to the next waypoint, if we are still in range
@@ -196,21 +154,26 @@ public class SimpleAIController4 : MonoBehaviour
                     {
                         currentWaypoint++;
                     }
-
+                    //Once we reach the last waypoint, stop
                     break;
 
+                //If the loop type is "Loop"
                 case LoopType.Loop:
+                    // Advance to the next waypoint, if we are still in range
                     if (currentWaypoint < waypoints.Length - 1)
                     {
                         currentWaypoint++;
                     }
+                    //Otherwise...
                     else
                     {
+                        //Start back at the beginning
                         currentWaypoint = 0;
                     }
 
                     break;
                 case LoopType.PingPong:
+                    //If we are moving forward...
                     if (isPatrolForward)
                     {
                         // Advance to the next waypoint, if we are still in range
@@ -234,7 +197,7 @@ public class SimpleAIController4 : MonoBehaviour
                         }
                         else
                         {
-                            //Otherwise reverse direction and decrement our current waypoint
+                            //Otherwise reverse direction and increment our current waypoint
                             isPatrolForward = true;
                             currentWaypoint++;
                         }
@@ -247,54 +210,105 @@ public class SimpleAIController4 : MonoBehaviour
             }
         }
     }
-
+    //Flee only
     private void Blinky()
     {
         switch (attackMode)
         {
+            //If this AI is in chase mode...
             case AttackMode.Chase:
-                Chase(player);
+                //Do nothing
+                if (distance < 10f)
+                {
+                    attackMode = AttackMode.Flee;
+                }
                 break;
+            //If this AI is in flee mode...
             case AttackMode.Flee:
-                Flee(player);
+                //If there is something in the way...
+                if (avoidanceStage != AvoidanceStage.None)
+                {
+                    //Avoid it
+                    Avoid();
+                }
+                //Otherwise...
+                else
+                {
+                    //Flee
+                    Flee(player);
+                    //If the AI is far enough away from the player...
+                    if (distance >= 10f)
+                    {
+                        //Stop
+                        attackMode = AttackMode.Chase;
+                    }
+                }
                 break;
             default:
                 Debug.LogError("Attack Mode not implemented");
                 break;
         }
     }
-
+    //Chase only
     private void Clyde()
     {
-        if (attackMode == AttackMode.Chase)
+        switch (attackMode)
         {
-            if (avoidanceStage != AvoidanceStage.None)
-            {
-                Avoid();
-            }
-            else
-            {
-                Chase(player);
-            }
+            case AttackMode.Chase:
+                //If there is something in the way...
+                if (avoidanceStage != AvoidanceStage.None)
+                {
+                    //Avoid it
+                    Avoid();
+                }
+                else
+                {
+                    Chase(player);
+                }
+                break;
+            case AttackMode.Flee:
+                //Do nothing
+                break;
         }
     }
 
+    private void Flee(GameObject target)
+    {
+        // The vector from ai to target is target position minus our position.
+        Vector3 vectorToTarget = target.GetComponent<Transform>().position - tf.position;
+        // We can flip this vector by -1 to get a vector AWAY from our target
+        Vector3 vectorAway = vectorToTarget * -1;
+        // Now, we can normalize that vector to give it a magnitude of 1
+        vectorAway.Normalize();
+        // A normalized vector can be multiplied by a length to make a vector of that length.
+        vectorAway *= fleeDistance;
+        // We can find the position in space we want to move to by adding our vector away from our AI to our AI's position.
+        //This gives us a point that is "that vector away" from our current position.
+        Vector3 fleePosition = vectorAway + tf.position;
+        motor.RotateTowards(fleePosition, data.rotateSpeed);
+        motor.Move(data.moveSpeed);
+    }
     private void Avoid()
     {
         switch (avoidanceStage)
         {
             case AvoidanceStage.Rotate:
+                //Rotate
                 motor.Rotate(data.rotateSpeed);
+                //If there is nothing in the way...
                 if (CanMove(data.moveSpeed))
                 {
+                    //Move
                     avoidanceStage = AvoidanceStage.Move;
                     exitTime = avoidanceTime;
                 }
                 break;
             case AvoidanceStage.Move:
+                //If there is nothing in the way...
                 if (CanMove(data.rotateSpeed))
                 {
                     exitTime -= Time.deltaTime;
+                    //Move forwards
                     motor.Move(data.moveSpeed);
 
                     if (exitTime <= 0f)
@@ -302,8 +316,10 @@ public class SimpleAIController4 : MonoBehaviour
                         avoidanceStage = AvoidanceStage.None;
                     }
                 }
+                //Otherwise...
                 else
                 {
+                    //Rotate
                     avoidanceStage = AvoidanceStage.Rotate;
                 }
                 break;
@@ -313,10 +329,11 @@ public class SimpleAIController4 : MonoBehaviour
     public bool CanMove(float speed)
     {
         RaycastHit hit;
+        //If we hit something...
         if (Physics.Raycast(tf.position, tf.forward, out hit, speed))
         {
             // ... and if what we hit is not the player...
-            if (!hit.collider.CompareTag("Player"))
+            if (!hit.collider.CompareTag("Player") && !hit.collider.CompareTag("Enemy"))
             {
                 // ... then we can't move
                 return false;
@@ -332,21 +349,14 @@ public class SimpleAIController4 : MonoBehaviour
         target = GameObject.Find("Player");
         //Rotate towards player
         motor.RotateTowards(target.GetComponent<Transform>().position, data.rotateSpeed);
-        //Move towards player
-        motor.Move(data.moveSpeed);
-    }
-    public void CheckForFlee()
-    {
-        // TODO: Write the CheckForFlee state.
-    }
-
-    public void Rest()
-    {
-        // Increase our health. Remember that our increase is "per second"!
-        data.health += restingHealRate * Time.deltaTime;
-
-        // But never go over our max health
-        data.health = Mathf.Min(data.health, data.maxHealth);
+        if (CanMove(data.moveSpeed))
+        {
+            motor.Move(data.moveSpeed);
+        }
+        else
+        {
+            avoidanceStage = AvoidanceStage.Rotate;
+        }
     }
 
     public void ChangeState(AIState newState)
