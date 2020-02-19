@@ -63,8 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Cannonball.cs" />
+    <Compile Include="Assets\Scripts\Cheats.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
+    <Compile Include="Assets\Scripts\PowerUp.cs" />
+    <Compile Include="Assets\Scripts\PowerUpController.cs" />
     <Compile Include="Assets\Scripts\SimpleAIController.cs" />
     <Compile Include="Assets\Scripts\SimpleAIController2.cs" />
     <Compile Include="Assets\Scripts\SimpleAIController3.cs" />
