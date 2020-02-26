@@ -10,9 +10,9 @@ public class SimpleAIController4 : MonoBehaviour
     private Transform tf;
     public enum AIState { Chase, Patrol, Hear };
     public AIState aiState = AIState.Patrol;
-    public enum Personalities { Inky, Pinky, Blinky, Clyde };
+    public enum Personalities { Sense, Waypoint, Flee, Chasing };
 
-    public Personalities personality = Personalities.Inky;
+    public Personalities personality = Personalities.Sense;
     public float stateEnterTime;
     public float aiSenseRadius;
     public float restingHealRate; // in hp/second 
@@ -63,22 +63,22 @@ public class SimpleAIController4 : MonoBehaviour
         switch (personality)
         {
             //Different personalities
-            case Personalities.Inky:
-                Inky();
+            case Personalities.Sense:
+                Sense();
                 break;
-            case Personalities.Pinky:
-                Pinky();
+            case Personalities.Waypoint:
+                Waypoint();
                 break;
-            case Personalities.Blinky:
-                Blinky();
+            case Personalities.Flee:
+                Flee();
                 break;
-            case Personalities.Clyde:
-                Clyde();
+            case Personalities.Chasing:
+                Chasing();
                 break;
         }
     }
     //Hearing/Seeing
-    private void Inky()
+    private void Sense()
     {
         switch (aiState)
         {
@@ -126,7 +126,7 @@ public class SimpleAIController4 : MonoBehaviour
         }
     }
     //Waypoints
-    private void Pinky()
+    private void Waypoint()
     {
         //If the AI is already rotated towards the next waypoint...
         if (motor.RotateTowards(waypoints[currentWaypoint].position, data.rotateSpeed))
@@ -211,7 +211,7 @@ public class SimpleAIController4 : MonoBehaviour
         }
     }
     //Flee only
-    private void Blinky()
+    private void Flee()
     {
         switch (attackMode)
         {
@@ -250,7 +250,7 @@ public class SimpleAIController4 : MonoBehaviour
         }
     }
     //Chase only
-    private void Clyde()
+    private void Chasing()
     {
         switch (attackMode)
         {
