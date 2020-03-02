@@ -52,7 +52,7 @@ public class SimpleAIController4 : MonoBehaviour
         tf = GetComponent<Transform>();
         data = GetComponent<TankData>();
         motor = GetComponent<TankMotor>();
-        player = GameObject.Find("Player");
+        player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -346,7 +346,7 @@ public class SimpleAIController4 : MonoBehaviour
 
     public void Chase(GameObject target)
     {
-        target = GameObject.Find("Player");
+        target = GameObject.FindWithTag("Player");
         //Rotate towards player
         motor.RotateTowards(target.GetComponent<Transform>().position, data.rotateSpeed);
         if (CanMove(data.moveSpeed))

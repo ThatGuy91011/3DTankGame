@@ -10,8 +10,9 @@ public class MoveCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playertf = GameObject.Find("Player").GetComponent<Transform>();
+        playertf = GameObject.FindWithTag("Player").GetComponent<Transform>();
         tf = GetComponent<Transform>();
+        tf.position = new Vector3(playertf.position.x, 100, playertf.position.z);
     }
 
     // Update is called once per frame

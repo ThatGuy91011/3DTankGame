@@ -134,7 +134,7 @@ PrefabInstance:
     - target: {fileID: 6942704783235605631, guid: 0996c80540c07304a85cad1a28fd5c61,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.054540634
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 6942704783235605631, guid: 0996c80540c07304a85cad1a28fd5c61,
         type: 3}
@@ -181,6 +181,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5141841130234502987, guid: 0996c80540c07304a85cad1a28fd5c61,
+        type: 3}
+      propertyPath: pow.speedModifier
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141841130234502987, guid: 0996c80540c07304a85cad1a28fd5c61,
+        type: 3}
+      propertyPath: pow.duration
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141841130234502987, guid: 0996c80540c07304a85cad1a28fd5c61,
+        type: 3}
+      propertyPath: pow.isPermanent
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1542030383725881347, guid: 0996c80540c07304a85cad1a28fd5c61,
         type: 3}
       propertyPath: m_Enabled
@@ -198,7 +213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 432352522, guid: 0996c80540c07304a85cad1a28fd5c61, type: 3}
       propertyPath: moveSpeed
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 432352522, guid: 0996c80540c07304a85cad1a28fd5c61, type: 3}
       propertyPath: rotateSpeed
@@ -212,8 +227,7 @@ PrefabInstance:
       propertyPath: fireRate
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5605850799479026101, guid: 0996c80540c07304a85cad1a28fd5c61, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0996c80540c07304a85cad1a28fd5c61, type: 3}
 --- !u!1 &2290902779529475906 stripped
 GameObject:

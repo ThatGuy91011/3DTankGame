@@ -40,7 +40,7 @@ public class Cannonball : MonoBehaviour
             //Enemy takes damage
             other.gameObject.GetComponent<TankData>().TakeDamage(damage);
             //Player earns points
-            GameObject.Find("Player").GetComponent<TankData>().Score(pointValue);
+            GameObject.FindWithTag("Player").GetComponent<TankData>().Score(pointValue);
             //Destroy this bullet
             Destroy(this.gameObject);
         }
