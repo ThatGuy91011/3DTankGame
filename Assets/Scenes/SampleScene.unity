@@ -260,11 +260,12 @@ MonoBehaviour:
   icamera: {fileID: 0}
   camera: {fileID: 6642899649251869087, guid: 6d7f36ac09d991446845afab9dc4983e, type: 3}
   enemyTanks:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4266496030435351240, guid: 760e3f21c3fbe204aa9cdb882e7f3f07, type: 3}
+  - {fileID: 8535228727947092541, guid: c022afd9c39f7af4c980bab65f4e8f89, type: 3}
+  - {fileID: 3327419008934183743, guid: e01246f066c606e43b68d2ed0e0e5c54, type: 3}
+  - {fileID: 8634391675794493558, guid: 46d5f123168ff974ea046885fd925506, type: 3}
   playerSpawnPoints: []
+  instantiatedEnemyTanks: []
   enemySpawnPoints: []
 --- !u!1 &1288181637
 GameObject:

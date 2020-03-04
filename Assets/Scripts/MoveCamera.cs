@@ -12,7 +12,7 @@ public class MoveCamera : MonoBehaviour
     {
         playertf = GameObject.FindWithTag("Player").GetComponent<Transform>();
         tf = GetComponent<Transform>();
-        tf.position = new Vector3(playertf.position.x, 100, playertf.position.z);
+        tf.position = new Vector3(playertf.position.x, 50, playertf.position.z);
     }
 
     // Update is called once per frame

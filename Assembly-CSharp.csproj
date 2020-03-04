@@ -65,7 +65,7 @@
     <Compile Include="Assets\Objects\RoomTileTemplate\Scripts\Room.cs" />
     <Compile Include="Assets\Scripts\Cannonball.cs" />
     <Compile Include="Assets\Scripts\Cheats.cs" />
-    <Compile Include="Assets\Scripts\EnemySpawn.cs" />
+    <Compile Include="Assets\Scripts\EnemySpawnPoint.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
     <Compile Include="Assets\Scripts\MapGenerator.cs" />

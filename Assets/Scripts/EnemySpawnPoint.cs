@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawn : MonoBehaviour
+public class EnemySpawnPoint : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GameManager.instance.enemySpawnPoints.Add(this.gameObject);
     }
@@ -13,11 +13,5 @@ public class EnemySpawn : MonoBehaviour
     void OnDestroy()
     {
         GameManager.instance.enemySpawnPoints.Remove(this.gameObject);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

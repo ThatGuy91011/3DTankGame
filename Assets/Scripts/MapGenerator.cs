@@ -45,6 +45,9 @@ public class MapGenerator : MonoBehaviour
                 break;
         }
         GenerateGrid();
+        
+        GameManager.instance.SpawnPlayer(GameManager.instance.RandomSpawn(GameManager.instance.playerSpawnPoints));
+        GameManager.instance.SpawnEnemies();
     }
 
     // Update is called once per frame
