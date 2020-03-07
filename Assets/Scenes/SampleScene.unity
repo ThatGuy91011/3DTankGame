@@ -298,12 +298,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapType: 1
   mapSeed: 0
-  rows: 4
-  columns: 5
+  rows: 3
+  columns: 3
   gridPrefabs:
-  - {fileID: 121816, guid: 41d4243be8ad3a5409422171976de7ff, type: 3}
-  - {fileID: 2569608745569617718, guid: ae34e44d815efb44bbd8f81db0799e21, type: 3}
   - {fileID: 3692702545920649473, guid: 0a5f41feb6b130d4dbbca2ba67ab71ed, type: 3}
+  - {fileID: 6309507573146933087, guid: 51dd9366e4243ab4fae53cdc72c6a454, type: 3}
+  - {fileID: 5812408405776545846, guid: 029bcfe4568f4e04ba9d2c1078d077dd, type: 3}
+  - {fileID: 2569608745569617718, guid: ae34e44d815efb44bbd8f81db0799e21, type: 3}
 --- !u!4 &1288181639
 Transform:
   m_ObjectHideFlags: 0

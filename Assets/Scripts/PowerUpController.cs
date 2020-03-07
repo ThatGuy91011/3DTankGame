@@ -30,6 +30,7 @@ public class PowerUpController : MonoBehaviour
             if (power.duration <= 0)
             {
                 expiredPowerUps.Add(power);
+                
             }
         }
 
@@ -50,4 +51,6 @@ public class PowerUpController : MonoBehaviour
             powerups.Add(powerup);
         }
     }
+
+
 }

@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 16764f9122ea33d499ea6c9000293670, type: 2}
+  - {fileID: 2100000, guid: 1af057c66109aec42a321d227e159446, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,10 +106,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerup:
-    speedModifier: 0
-    healthModifier: 10
+    speedModifier: 10
+    healthModifier: 0
     maxHealthModifier: 0
     fireRateModifier: 0
-    duration: 0
-    isPermanent: 1
+    duration: 5
+    isPermanent: 0
   FeedbackAudioClip: {fileID: 0}

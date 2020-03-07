@@ -5,19 +5,9 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     public PowerUp powerup;
+    public int RespawnTime;
 
     public AudioClip FeedbackAudioClip;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnTriggerEnter(Collider other)
     {
@@ -34,9 +24,15 @@ public class Pickup : MonoBehaviour
                 AudioSource.PlayClipAtPoint(FeedbackAudioClip, gameObject.GetComponent<Transform>().position, 1.0f);
             }
             // Destroy this pickup
-            Destroy(this.gameObject);
+            GetComponent<MeshRenderer>().enabled = false;
+            StartCoroutine(Respawn(powerup));
         }
 
-
+        IEnumerator Respawn(PowerUp power)
+        {
+            yield return new WaitForSeconds(RespawnTime);
+            GetComponent<MeshRenderer>().enabled = true;
+            powerup.duration = 5;
+        }
     }
 }

@@ -42,18 +42,33 @@ public class GameManager : MonoBehaviour
         icamera = Instantiate(camera, new Vector3(spawnpoint.transform.position.x, 52, spawnpoint.transform.position.z),
             new Quaternion(45, 0, 0, 45));
     }
-    public GameObject RandomSpawn(List<GameObject> playerSpawnPoints)
+    public GameObject RandomSpawn(List<GameObject> SpawnPoints)
     {
-        int spawnToGet = UnityEngine.Random.Range(0, playerSpawnPoints.Count - 1);
-        return playerSpawnPoints[spawnToGet];
+        int spawnToGet = UnityEngine.Random.Range(0, SpawnPoints.Count - 1);
+        return SpawnPoints[spawnToGet];
     }
 
     public void SpawnEnemies()
     {
         for (int i = 0; i < enemyTanks.Length; ++i)
         {
-            GameObject instantiatedEnemyTank = Instantiate(enemyTanks[i], RandomSpawn(enemySpawnPoints).transform.position, Quaternion.identity);
-            instantiatedEnemyTanks.Add(instantiatedEnemyTank);
+            if (i == 0)
+            {
+
+                GameObject tempRSpawn = enemySpawnPoints[0];
+                GameObject instantiatedEnemyTank =
+                    Instantiate(enemyTanks[i], tempRSpawn.transform.position, Quaternion.identity);
+                GameManager.instance.enemySpawnPoints.Remove(tempRSpawn);
+                instantiatedEnemyTanks.Add(instantiatedEnemyTank);
+            }
+            else
+            {
+                GameObject tempRSpawn = RandomSpawn(enemySpawnPoints);
+                GameObject instantiatedEnemyTank =
+                    Instantiate(enemyTanks[i], tempRSpawn.transform.position, Quaternion.identity);
+                GameManager.instance.enemySpawnPoints.Remove(tempRSpawn);
+                instantiatedEnemyTanks.Add(instantiatedEnemyTank);
+            }
         }
     }
 }
